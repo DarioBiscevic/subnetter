@@ -7,16 +7,21 @@
 #include "net.h"
 #include "subnet.h"
 
+bool is_duplicate(char *name, subnet_t *list){
+    if(list == NULL)
+        return false;
+
+    if(strcmp(name, list->name) == 0)
+        return true;
+    
+    return is_duplicate(name, list->next);
+}
+
 unsigned int calculate_necessary_bits(unsigned int n_hosts){
-    int n = n_hosts;
-    unsigned int count = 0;
-
-    while(n > 0){
-        n /= 2;
-        count++;
-    }
-
-    return count;
+    if(n_hosts == 0)
+        return 0;
+    
+    return 1 + calculate_necessary_bits(n_hosts / 2);
 }
 
 void print_list(subnet_t *list){

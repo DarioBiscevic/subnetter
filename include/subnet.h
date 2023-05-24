@@ -15,10 +15,17 @@ typedef struct subnet_s {
 } subnet_t;
 
 unsigned int calculate_necessary_bits(unsigned int n_hosts);
+
 void print_list(subnet_t *list);
+
 subnet_t *new_subnet(char * name, unsigned int n_hosts);
+
 subnet_t *append(subnet_t *list, char * name, unsigned int n_hosts);
+
 subnet_t *insert_in_order(subnet_t *list, char * name, unsigned int n_hosts);
+
 int partition(subnet_t *list, net_t starting_address);
+
+bool is_duplicate(char *name, subnet_t *list);
 
 #endif
