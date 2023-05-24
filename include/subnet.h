@@ -5,12 +5,12 @@
 
 #define BUFFER_LEN 256
 
-
 typedef struct subnet_s {
     char *name;
     unsigned int n_hosts;
     unsigned int bits;
     net_t address;
+    unsigned int broadcast_addr;
     struct subnet_s *next;
 } subnet_t;
 

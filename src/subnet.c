@@ -30,7 +30,9 @@ void print_list(subnet_t *list){
                 el->name,
                 el->n_hosts,
                 el->bits);
-            print_addr_dec(el->address);
+            print_net(el->address);
+            printf(" \t ");
+            print_addr(el->broadcast_addr);
             printf("\n");
             el = el->next;
         }
@@ -48,6 +50,7 @@ subnet_t *new_subnet(char * name, unsigned int n_hosts){
     new->bits = calculate_necessary_bits(n_hosts + 1);
     new->next = NULL;
     new->address = new_addr("0.0.0.0/0");
+    new->broadcast_addr = 0;
 
     return new;
 }
@@ -95,8 +98,7 @@ int partition(subnet_t *list, net_t starting_address){
         return 0;
     }
 
-    unsigned char starting_nm = starting_address.netmask;
-    int nm_diff = 32 - list->bits - starting_nm;
+    int nm_diff = 32 - list->bits - starting_address.netmask;
 
     if(nm_diff < 0){
         return 1;
@@ -108,16 +110,19 @@ int partition(subnet_t *list, net_t starting_address){
     unsigned int iters = pow(2, nm_diff);
 
     unsigned int i = 0;
-    unsigned int new_addr;
 
     net_t new_net;
-    new_net.netmask = starting_nm + nm_diff;
+    /*
+    * We can immediately set the netmask for this variable because it doesn't change
+    * during the execution
+    */
+    new_net.netmask = starting_address.netmask + nm_diff;
 
     while(el != NULL && el->bits == list->bits && i < iters){
-        new_addr = starting_address.address + i * shift;
-        new_net.address = new_addr;
+        new_net.address = starting_address.address + i * shift;
 
         el->address = new_net;
+        el->broadcast_addr = new_net.address + shift - 1;
 
         el = el->next;
         i++;
@@ -125,10 +130,8 @@ int partition(subnet_t *list, net_t starting_address){
 
     int out = 0;
     while(i < iters && out == 0 && el != NULL){
-        
         if(el->address.address == 0){
-            new_addr = starting_address.address + i * shift;
-            new_net.address = new_addr;
+            new_net.address = starting_address.address + i * shift;
 
             out = partition(el, new_net);
             i++;

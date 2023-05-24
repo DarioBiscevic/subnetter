@@ -21,8 +21,7 @@ int main(int argc, char *argv[]){
 
     do {
         printf("Subnet name: ");
-        fgets(name_buffer, BUFFER_LEN, stdin);
-        trim(name_buffer);
+        read_trimmed(name_buffer, BUFFER_LEN);
     }while(strlen(name_buffer) == 0);
 
     while(name_buffer[0] != '\\'){
@@ -34,8 +33,12 @@ int main(int argc, char *argv[]){
         subnets = insert_in_order(subnets, name_buffer, atoi(host_buffer));
         n++;
 
-        printf("\nSubnet name: ");
-        read_trimmed(name_buffer, BUFFER_LEN);
+        printf("\n");
+
+        do {
+            printf("Subnet name: ");
+            read_trimmed(name_buffer, BUFFER_LEN);
+        }while(strlen(name_buffer) == 0);
     }
 
     do {

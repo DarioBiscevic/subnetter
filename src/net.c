@@ -2,20 +2,25 @@
 
 #include "net.h"
 
-void print_addr_dec(net_t net){
-    unsigned int acc = net.address;
+void print_addr(unsigned int addr){
     unsigned int dec[4];
 
     for(int i = 3; i >= 0; i--){
-        dec[i] = acc % 256;
-        acc /= 256;
+        dec[i] = addr % 256;
+        addr /= 256;
     }
 
     for(int i = 0; i < 3; i++){
         printf("%d.", dec[i]);
     }
 
-    printf("%d/%d", dec[3], net.netmask);
+    printf("%d", dec[3]);
+}
+
+void print_net(net_t net){
+    print_addr(net.address);
+
+    printf("/%d", net.netmask);
 }
 
 net_t new_addr(char buffer[]){

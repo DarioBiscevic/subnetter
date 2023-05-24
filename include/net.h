@@ -6,7 +6,8 @@ typedef struct net_s {
     unsigned char netmask;
 } net_t;
 
-void print_addr_dec(net_t net);
+void print_addr(unsigned int addr);
+void print_net(net_t net);
 net_t new_addr(char buffer[]);
 
 #endif
