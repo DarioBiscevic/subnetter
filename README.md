@@ -4,7 +4,9 @@ A tool that partitions a network into subnets of the desired size.
 ## Building
 Execute the `build.sh` script. 
 
+
 *Why don't you use CMake, or Make, or QMake or any other build tool?*
+
 Simply put, I do not know (yet!) how to use any of them in a more or less decent manner.
 Sooner or later I'll change it. Sorry in advance!
 
