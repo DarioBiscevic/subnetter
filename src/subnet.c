@@ -4,8 +4,8 @@
 #include <stdbool.h>
 #include <math.h>
 
-#include "net.h"
-#include "subnet.h"
+#include <net.h>
+#include <subnet.h>
 
 bool is_duplicate(char *name, subnet_t *list){
     if(list == NULL)
@@ -60,27 +60,6 @@ subnet_t *new_subnet(char * name, unsigned int n_hosts){
     return new;
 }
 
-subnet_t *append(subnet_t *list, char * name, unsigned int n_hosts){
-    if(list == NULL){
-        //Return a new subnet as the new list
-        return new_subnet(name, n_hosts);
-    }
-
-    if(list->next != NULL){
-        list->next = append(list->next, name, n_hosts);
-        return list;
-    }
-
-    //Create new subnet
-    subnet_t *new =  new_subnet(name, n_hosts);
-    new->next = NULL;
-
-    //Add it to the tail of the list
-    list->next = new;
-
-    return list;
-}
-
 subnet_t *insert_in_order(subnet_t *list, char * name, unsigned int n_hosts){
     if(list == NULL){
         return new_subnet(name, n_hosts);
@@ -105,9 +84,8 @@ int partition(subnet_t *list, net_t starting_address){
 
     int nm_diff = 32 - list->bits - starting_address.netmask;
 
-    if(nm_diff < 0){
+    if(nm_diff < 0)
         return 1;
-    }
 
     subnet_t *el = list;
 

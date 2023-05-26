@@ -4,8 +4,8 @@
 #include <stdbool.h>
 #include <regex.h>
 
-#include "subnet.h"
-#include "utils.h"
+#include <subnet.h>
+#include <utils.h>
 
 #define ADDR_LEN 20
 #define STOP_CHAR '\\'
@@ -62,12 +62,12 @@ int main(int argc, char *argv[]){
     net_t starting_address = new_addr(addr_buffer);
     int res = partition(subnets, starting_address);
 
-    if(res != 0){
-        printf("An error occured during the partitioning process\n");
-    }else{
+    if(res != 0)
+        printf("An error occured during the partitioning process");
+    else
         print_list(subnets);
-        printf("\n");
-    }
+    
+    printf("\n");
 
     return res;
 }

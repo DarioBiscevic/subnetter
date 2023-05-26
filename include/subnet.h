@@ -1,7 +1,7 @@
 #ifndef SUBNET_H
 #define SUBNET_H
 
-#include "net.h"
+#include <net.h>
 
 #define BUFFER_LEN 256
 
@@ -14,18 +14,16 @@ typedef struct subnet_s {
     struct subnet_s *next;
 } subnet_t;
 
-unsigned int calculate_necessary_bits(unsigned int n_hosts);
+unsigned int calculate_necessary_bits(unsigned int);
 
-void print_list(subnet_t *list);
+void print_list(subnet_t *);
 
-subnet_t *new_subnet(char * name, unsigned int n_hosts);
+subnet_t *new_subnet(char *, unsigned int);
 
-subnet_t *append(subnet_t *list, char * name, unsigned int n_hosts);
+subnet_t *insert_in_order(subnet_t *, char *, unsigned int);
 
-subnet_t *insert_in_order(subnet_t *list, char * name, unsigned int n_hosts);
+int partition(subnet_t *, net_t);
 
-int partition(subnet_t *list, net_t starting_address);
-
-bool is_duplicate(char *name, subnet_t *list);
+bool is_duplicate(char *, subnet_t *);
 
 #endif

@@ -4,8 +4,8 @@
 #include <stdbool.h>
 #include <regex.h>
 
-#include "subnet.h"
-#include "utils.h"
+#include <subnet.h>
+#include <utils.h>
 
 void read_trimmed(char *buffer, unsigned int len){
     fgets(buffer, BUFFER_LEN, stdin);

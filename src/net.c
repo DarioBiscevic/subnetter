@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "net.h"
+#include <net.h>
 
 #define BYTE 256
 

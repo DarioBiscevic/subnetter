@@ -6,8 +6,10 @@ typedef struct net_s {
     unsigned char netmask;
 } net_t;
 
-void print_addr(unsigned int addr);
-void print_net(net_t net);
-net_t new_addr(char buffer[]);
+void print_addr(unsigned int);
+
+void print_net(net_t);
+
+net_t new_addr(char []);
 
 #endif
