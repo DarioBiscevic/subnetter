@@ -61,9 +61,9 @@ subnet_t *new_subnet(char * name, unsigned int n_hosts){
 }
 
 subnet_t *insert_in_order(subnet_t *list, char * name, unsigned int n_hosts){
-    if(list == NULL){
+    if(list == NULL)
         return new_subnet(name, n_hosts);
-    }
+    
 
     if(n_hosts > list->n_hosts){
         subnet_t *new = new_subnet(name, n_hosts);
@@ -78,9 +78,8 @@ subnet_t *insert_in_order(subnet_t *list, char * name, unsigned int n_hosts){
 
 int partition(subnet_t *list, net_t starting_address){
 
-    if(list == NULL){
+    if(list == NULL)
         return 0;
-    }
 
     int nm_diff = 32 - list->bits - starting_address.netmask;
 

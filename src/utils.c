@@ -47,9 +47,8 @@ bool is_addr_valid(char *addr){
 
 void trim(char *s){
     int i;
-    for(i = 0; s[i] != '\0'; i++){
+    for(i = 0; s[i] != '\0'; i++)
         if(s[i] == '\n')
             s[i] = '\0';
-    }
 }
 
